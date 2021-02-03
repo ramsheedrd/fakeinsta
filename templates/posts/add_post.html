@@ -3,6 +3,13 @@
 {% load static %}
 {% load widget_tweaks %}
 
+{% block scripts_extra %}
+    <script src="{% static 'posts/compressor.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.9/cropper.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.9/cropper.min.css">
+{% endblock scripts_extra %}
+
+
 {% block content %}
 <div class="d-flex justify-content-center mt-0 mt-sm-20">
     <div class="w-full"
@@ -216,27 +223,42 @@
 
         form.addEventListener('submit', function(event){
             event.preventDefault();
-            var formData = new FormData()
 
-            formData.append('csrfmiddlewaretoken', form.csrfmiddlewaretoken.value)
-            formData.append('caption', form.caption.value)
             if(blob != undefined){
-                formData.append('image', blob, imgSelector.files[0].name)
+
+                var file = new File([blob], imgSelector.files[0].name, {type: blob.type, lastModified: new Date().getTime()})
+                console.log(file.size)
+
+                new Compressor(file, {
+                quality: 0.6,
+                width: 1080,
+                maxWidth: 1080,
+                success(result) {
+                    console.log(result.size)
+                    var formData = new FormData()
+                    formData.append('csrfmiddlewaretoken', form.csrfmiddlewaretoken.value)
+                    formData.append('caption', form.caption.value)
+
+                    // The third parameter is required for server
+                    formData.append('image', result, result.name);
+
+                    $.ajax("{% url 'posts:add_post' %}", {
+                        method: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success() {
+                            console.log('Upload success');
+                            location.replace('{% url "posts:home" %}')
+                        },
+                        error() {
+                            console.log('Upload error');
+                        },
+                    });
+
+                    }
+                })
             }
-            
-            $.ajax("{% url 'posts:add_post' %}", {
-                method: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success() {
-                console.log('Upload success');
-                location.replace('{% url "posts:home" %}')
-                },
-                error() {
-                console.log('Upload error');
-                },
-            });
 
 
         })
