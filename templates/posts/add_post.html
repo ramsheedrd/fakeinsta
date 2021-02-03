@@ -15,6 +15,7 @@
 
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
+                <img id="target" class="w-full border rounded" src="" alt="">
                 <div class="mb-10">
                     <label class="btn text-muted font-weight-medium" for="id_image">Choose Image</label>
                     {% render_field form.image class="form-control d-none" placeholder=form.image.label %}
@@ -97,6 +98,27 @@
 
         </div>
     </div>
+
+    <script>
+        function readURL(event) {
+            let input = event.target
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    document.querySelector('#target').setAttribute('src', e.target.result);
+                    document.querySelector('#target').classList.add('mb-10');
+                    document.querySelector('label[for="id_image"]').innerHTML = 'Change Image'
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        var imgSelector = document.getElementById('id_image')
+        imgSelector.addEventListener('change', readURL)
+
+    </script>
+
 </div>
 {% endblock content %}
-    
