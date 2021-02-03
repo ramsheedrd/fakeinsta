@@ -1,0 +1,102 @@
+{% extends 'posts/base.html' %}
+
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="d-flex justify-content-center mt-0 mt-sm-20">
+    <div class="w-full"
+        style="max-width: 610px;">
+
+        <!-- card -->
+        <div class="bg-white border border-1 rounded mb-sm-20 p-20">
+            
+            <h5 class="font-weight-semi-bold">New Post</i></h5>
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-10">
+                    <label class="btn text-muted font-weight-medium" for="id_image">Choose Image</label>
+                    {% render_field form.image class="form-control d-none" placeholder=form.image.label %}
+                    <ul class="errorlist">
+                        {% for err in form.image.errors %}
+                        <li>{{ err }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="mb-10">
+                    {% render_field form.caption class="form-control" placeholder='Write a caption...' %}
+                    <ul class="errorlist">
+                        {% for err in form.caption.errors %}
+                        <li>{{ err }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Post">
+            </form>
+
+        </div>
+        
+    </div>
+
+    <!-- right-side-bar -->
+    <div class="d-none d-lg-block position-relative" style="max-width: 290px;width: 290px; margin-left: 40px;z-index: 1;">
+        <div class="position-fixed" style="width: inherit;margin-top: 2em;">
+            <!-- userpic & name -->
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <img class="border rounded-circle w-50 mr-10" src="{% static 'accounts/avatar.png' %}" alt="">
+                    <div>
+                        <div class="text-black font-weight-medium">designs.ui</div>
+                        <div class="text-gray">ui/ux designs</div>
+                    </div>
+                </div>
+                <button class="ico text-primary border-0 bg-transparent font-size-12 font-weight-medium">More</button>
+            </div>
+
+            <!-- suggestion -->
+            <div class="d-flex justify-content-between align-items-center  mt-20 mb-15">
+                <div class="text-muted font-size-14 font-weight-medium">
+                    Suggestions For You
+                </div>
+                <button class="ico text-dark border-0 bg-transparent font-size-12 font-weight-medium">See All</button>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-10">
+                <div class="d-flex align-items-center">
+                    <img style="width: 35px; height: 35px; object-fit: cover;" class="border rounded-circle mr-10" src="https://images.unsplash.com/photo-1564048843342-6588968397ce?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=40&q=80" alt="">
+                    <div>
+                        <div class="text-black font-weight-medium">picstay_kerala</div>
+                        <div class="text-gray font-size-12">Suggested for you</div>
+                    </div>
+                </div>
+                <button class="ico text-primary border-0 bg-transparent font-size-12 font-weight-medium">Follow</button>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-10">
+                <div class="d-flex align-items-center">
+                    <img style="width: 35px; height: 35px; object-fit: cover;" class="border rounded-circle mr-10" src="https://images.unsplash.com/photo-1574579991264-a87099cc17b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=40&q=80" alt="">
+                    <div>
+                        <div class="text-black font-weight-medium">amazingdestination.z</div>
+                        <div class="text-gray font-size-12">Popular</div>
+                    </div>
+                </div>
+                <button class="ico text-primary border-0 bg-transparent font-size-12 font-weight-medium">Follow</button>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-10">
+                <div class="d-flex align-items-center">
+                    <img style="width: 35px; height: 35px; object-fit: cover;" class="border rounded-circle mr-10" src="https://images.unsplash.com/photo-1485206412256-701ccc5b93ca?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=42&q=80" alt="">
+                    <div>
+                        <div class="text-black font-weight-medium">jacobelordi</div>
+                        <div class="text-gray font-size-12">Popular</div>
+                    </div>
+                </div>
+                <button class="ico text-primary border-0 bg-transparent font-size-12 font-weight-medium">Follow</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}
+    

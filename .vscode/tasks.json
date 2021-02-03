@@ -1,0 +1,64 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Superuser Create",
+            "type": "shell",
+            "command": "${config:python.pythonPath}",
+            "args":[ 
+                "manage.py",
+                "createsuperuser"
+            ],
+            "group": "none",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+                }
+        },
+        {
+            "label": "Django Run Server",
+            "type": "shell",
+            "command": "${config:python.pythonPath}",
+            "args":[ 
+                "manage.py",
+                "runserver"
+            ],
+            "group": "none",
+            "presentation": {
+                "reveal": "never",
+                "panel": "new"
+                }
+        },
+        {
+            "label": "Migrate",
+            "type": "shell",
+            "command": "${config:python.pythonPath}",
+            "args":[ 
+                "manage.py",
+                "migrate"
+            ],
+            "group": "none",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+                }
+        },
+        {
+            "label": "Make Migrations",
+            "type": "shell",
+            "command": "${config:python.pythonPath}",
+            "args":[ 
+                "manage.py",
+                "makemigrations"
+            ],
+            "group": "none",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+                }
+        },
+
+    ]
+}

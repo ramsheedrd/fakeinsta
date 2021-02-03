@@ -1,0 +1,170 @@
+{% extends 'posts/base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <div class="d-flex justify-content-center mt-0 mt-sm-20">
+        <div class="w-full"
+            style="max-width: 610px;">
+            <!-- posts -->
+
+            {% for post in posts %}
+            <div class="bg-white border border-1 rounded mb-sm-20">
+                
+                <!-- post title -->
+                <div style="height: 60px;" class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <img class="border rounded-circle mx-15" style="width: 35px; height: 35px; object-fit: cover;" 
+                             src="https://images.unsplash.com/photo-1611615842525-6c2adb767846?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=40&q=80" alt="">
+                        <div >
+                            <p class="m-0 font-size-14 font-weight-medium">{{ post.user.first_name }}</p>
+                            <p class="m-0 font-size-12">Heaven</p>
+                        </div>
+                    </div>
+                    <div class="mx-15">
+                        <img style="width: 15px;" src="{% static 'posts/menu.svg' %}" alt="">
+                    </div>
+                </div>
+
+                <!-- post image -->
+                <img class="w-full" src="{{ post.image.url }}" alt="">
+
+                <!-- post footer -->
+                <div class="mx-10 px-5 my-5">
+
+                    <!-- post button -->
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <button class="ico text-dark pl-0 border-0 bg-transparent font-size-22"><i class="far fa-heart"></i></button>
+                            <button class="ico text-dark border-0 bg-transparent font-size-22"><i class="far fa-comment"></i></button>
+                            <button class="ico text-dark border-0 bg-transparent font-size-22"><i class="far fa-paper-plane"></i></button> 
+                        </div>
+                        <div>
+                            <button class="ico text-dark border-0 bg-transparent font-size-22"><i class="far fa-bookmark"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- post likes -->
+                    <p class="my-5 font-weight-semi-bold text-dark">5,019 likes</p>
+
+                    <!-- post user and description -->
+                    <div>
+                        <p class="my-0 text-dark d-inline-block">
+                            <span class="font-weight-semi-bold ">{{ post.user.first_name }}</span>
+                            <span class="">
+                                {{ post.caption }}
+                            </span>
+                        </p>
+                    </div>
+
+                    <!-- comments -->
+                    <span class="text-gray font-size-14">View all 17 comments</span>
+
+                    <div>
+                        <div class="mt-5">
+                            <p class="my-0 text-dark d-inline-block">
+                                <span class="font-weight-semi-bold ">photograpvintage</span>
+                                <span class="">
+                                    😂😂😂#memes follow @norulesmake.up
+                                    Follow @norulesmake.up tag @norulesmake.up to get featured
+                                </span>
+                            </p>
+                        </div>
+                        <div class="mt-5">
+                            <p class="my-0 text-dark d-inline-block">
+                                <span class="font-weight-semi-bold ">sara_begou</span>
+                                <span class="">
+                                    @juju_brds ptdr moi la dernière fois à Pau
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- end comments -->
+
+                    <!-- published time -->
+                    <div style="font-size: 10px;" class="text-uppercase mt-5 mb-10 text-gray">3 days ago</div>
+
+
+                </div>
+
+                <div class="d-none d-sm-block">
+                    <hr>
+                </div>
+                <!-- new comment -->
+                <div class="d-none d-sm-flex mx-10 px-5 h-50">
+                    <button style="font-size: 24px;" class="ico text-dark pl-0 mr-5 border-0
+                                   bg-transparent">
+                        <i class="far fa-smile"></i>
+                    </button>
+                    <input class="d-block w-full ico border-0" placeholder="Add a comment..." type="text">
+                    <button class="ico text-primary pl-0 border-0 bg-transparent font-weight-medium">Post</button>
+                </div>
+
+            </div>
+            {% endfor %}
+
+
+            
+        </div>
+
+        <!-- right-side-bar -->
+        <div class="d-none d-lg-block position-relative" style="max-width: 290px;width: 290px; margin-left: 40px;z-index: 1;">
+            <div class="position-fixed" style="width: inherit;margin-top: 2em;">
+                <!-- userpic & name -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <img class="border rounded-circle w-50 mr-10" src="{% static 'accounts/avatar.png' %}" alt="">
+                        <div>
+                            <div class="text-black font-weight-medium">designs.ui</div>
+                            <div class="text-gray">ui/ux designs</div>
+                        </div>
+                    </div>
+                    <button class="ico text-primary border-0 bg-transparent font-size-12 font-weight-medium">More</button>
+                </div>
+
+                <!-- suggestion -->
+                <div class="d-flex justify-content-between align-items-center  mt-20 mb-15">
+                    <div class="text-muted font-size-14 font-weight-medium">
+                        Suggestions For You
+                    </div>
+                    <button class="ico text-dark border-0 bg-transparent font-size-12 font-weight-medium">See All</button>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-10">
+                    <div class="d-flex align-items-center">
+                        <img style="width: 35px; height: 35px; object-fit: cover;" class="border rounded-circle mr-10" src="https://images.unsplash.com/photo-1564048843342-6588968397ce?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=40&q=80" alt="">
+                        <div>
+                            <div class="text-black font-weight-medium">picstay_kerala</div>
+                            <div class="text-gray font-size-12">Suggested for you</div>
+                        </div>
+                    </div>
+                    <button class="ico text-primary border-0 bg-transparent font-size-12 font-weight-medium">Follow</button>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-10">
+                    <div class="d-flex align-items-center">
+                        <img style="width: 35px; height: 35px; object-fit: cover;" class="border rounded-circle mr-10" src="https://images.unsplash.com/photo-1574579991264-a87099cc17b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=40&q=80" alt="">
+                        <div>
+                            <div class="text-black font-weight-medium">amazingdestination.z</div>
+                            <div class="text-gray font-size-12">Popular</div>
+                        </div>
+                    </div>
+                    <button class="ico text-primary border-0 bg-transparent font-size-12 font-weight-medium">Follow</button>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-10">
+                    <div class="d-flex align-items-center">
+                        <img style="width: 35px; height: 35px; object-fit: cover;" class="border rounded-circle mr-10" src="https://images.unsplash.com/photo-1485206412256-701ccc5b93ca?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=42&q=80" alt="">
+                        <div>
+                            <div class="text-black font-weight-medium">jacobelordi</div>
+                            <div class="text-gray font-size-12">Popular</div>
+                        </div>
+                    </div>
+                    <button class="ico text-primary border-0 bg-transparent font-size-12 font-weight-medium">Follow</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+    
