@@ -23,7 +23,7 @@
             <form id="id_form" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <img id="target" class="w-full border rounded" src="" alt="">
-                <div class="mt-10 mb-10 d-flex justify-content-between">
+                <div class="mb-10 d-flex justify-content-between">
                     <label class="btn text-muted font-weight-medium" for="id_image">Choose Image</label>
                     {% render_field form.image class="form-control d-none" placeholder=form.image.label %}
                     
@@ -142,7 +142,7 @@
         var imgTarget = document.querySelector('#target')
         var editMenu = document.querySelector('#edit_menu')
         var freeCrop = document.querySelector('#free_crop')
-        var oneOneCrop = document.querySelector('#one_one_crop')
+        var oneOneCrop = document.querySelecstor('#one_one_crop')
         var fourThreeCrop = document.querySelector('#four_three_crop')
         var saveCrop = document.querySelector('#save_crop')
         var captionCon = document.querySelector('#caption_con')
@@ -152,6 +152,7 @@
         var cropper;
         var blob;
 
+        // previews image when selected from storage
         function readURL(event) {
             
             let input = event.target
@@ -163,7 +164,6 @@
 
                     // setting input file to img source
                     imgTarget.setAttribute('src', e.target.result);
-                    imgTarget.classList.add('mb-10');
                     document.querySelector('label[for="id_image"]').innerHTML = 'Change Image'
                     
 
@@ -197,7 +197,7 @@
 
         imgSelector.addEventListener('change', readURL)
 
-
+        // applying crop and previews new image
         saveCrop.addEventListener('click', function(){
 
             // return cropped image as blob
@@ -221,6 +221,7 @@
             })
         })
 
+        // compressing image on form submission
         form.addEventListener('submit', function(event){
             event.preventDefault();
 
@@ -229,10 +230,11 @@
                 var file = new File([blob], imgSelector.files[0].name, {type: blob.type, lastModified: new Date().getTime()})
                 console.log(file.size)
 
+                // compression start here
                 new Compressor(file, {
-                quality: 0.6,
-                width: 1080,
-                maxWidth: 1080,
+                quality: 0.4,
+                width: 780,
+                maxWidth: 780,
                 success(result) {
                     console.log(result.size)
                     var formData = new FormData()
@@ -242,6 +244,7 @@
                     // The third parameter is required for server
                     formData.append('image', result, result.name);
 
+                    // submititing form as ajax post
                     $.ajax("{% url 'posts:add_post' %}", {
                         method: 'POST',
                         data: formData,
