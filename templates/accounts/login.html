@@ -23,7 +23,7 @@
         <div class="mb-20">
         <input type="password" class="form-control" name='password' id="password" placeholder="password" required="required">
         {% if error %}
-        <p class="text-danger"> username or password is incorrect </p>
+        <p class="text-danger"> {{ error_msg }} </p>
         {% endif %}
         </div>
         <input class="btn btn-primary btn-block font-weight-medium" type="submit" value="Log In">

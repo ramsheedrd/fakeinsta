@@ -22,11 +22,15 @@
 
             <form id="id_form" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
+
+                <!-- preview target element -->
                 <img id="target" class="w-full border rounded" src="" alt="">
+
                 <div class="mb-10 d-flex justify-content-between">
                     <label class="btn text-muted font-weight-medium" for="id_image">Choose Image</label>
                     {% render_field form.image class="form-control d-none" placeholder=form.image.label %}
                     
+
                     <div style="display: none;" id="edit_menu">
                         <button id="free_crop" type="button" class="ico text-dark pl-0 border-0 bg-transparent font-size-16 font-weight-medium">FREE</button>
                         <button id="one_one_crop" type="button" class="ico text-dark border-0 bg-transparent font-size-16 font-weight-medium">1:1</i></button>
@@ -142,7 +146,7 @@
         var imgTarget = document.querySelector('#target')
         var editMenu = document.querySelector('#edit_menu')
         var freeCrop = document.querySelector('#free_crop')
-        var oneOneCrop = document.querySelecstor('#one_one_crop')
+        var oneOneCrop = document.querySelector('#one_one_crop')
         var fourThreeCrop = document.querySelector('#four_three_crop')
         var saveCrop = document.querySelector('#save_crop')
         var captionCon = document.querySelector('#caption_con')

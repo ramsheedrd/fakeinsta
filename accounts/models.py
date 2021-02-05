@@ -40,13 +40,14 @@ class UserManager(BaseUserManager):
 class UserAccounts(AbstractUser):
     username = None
     email = models.EmailField(_('email address'), unique=True)
-    phone = models.CharField(max_length=12)
+    phone = models.CharField(max_length=12, null=False)
     GENDER_CHOICES = (
         ('M', 'Male'),
         ('F', 'Female'),
         ('O','Other')
     )
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, null=False)
+    is_verified = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
