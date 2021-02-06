@@ -1,0 +1,31 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+    Sign Up
+{% endblock title %}
+    
+
+{% block content %}
+    
+<div class="w-300 w-sm-350 bg-white p-30 pb-20 border border-1 border-secondary text-center">
+    
+    <!-- logo -->
+    <div class="mb-20">
+        <h4 class="font-weight-semi-bold">Verification Required</h4>
+        <p>
+            A verification link has been sent to <b>{{ email }}</b>. Open it up to activate your account.
+        </p>
+    </div>
+
+    
+</div>
+
+<!-- sign in -->
+<div class="w-300 w-sm-350 bg-white mt-10 p-20 border border-1 border-secondary text-center">
+    Have an account?
+    <a href="{% url 'accounts:login' %}" class="">Log in</a>
+</div>
+
+{% endblock content %}

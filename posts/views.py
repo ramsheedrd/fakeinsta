@@ -7,7 +7,9 @@ from .models import Post
 
 @login_required
 def home_view(request):
-    posts = Post.objects.all()
+    posts = Post.objects.all().prefetch_related('post_likes')
+    for post in posts:
+        print(post.post_likes.count())
     return render(request, 'posts/home.html', {'posts':posts})
 
 @login_required
