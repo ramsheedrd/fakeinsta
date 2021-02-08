@@ -6,6 +6,7 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMultiAlternatives
+from django.contrib import messages
 
 from .forms import RegisterForm
 
@@ -30,6 +31,7 @@ def login_view(request):
         if user:
             if user.is_verified:
                 login(request, user)
+                messages.success(request, "successful")
                 return redirect("posts:home")
             else:
                 return render(
@@ -90,3 +92,4 @@ def logout_view(request):
 
 def verification_required(request, email):
     return render(request, "accounts/verification_required.html", {"email": email})
+

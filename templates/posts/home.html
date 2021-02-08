@@ -8,6 +8,7 @@
             style="max-width: 610px;">
             <!-- posts -->
 
+
             {% for post in posts %}
             <div class="bg-white border border-1 rounded mb-sm-20">
                 
@@ -35,7 +36,19 @@
                     <!-- post button -->
                     <div class="d-flex justify-content-between">
                         <div>
-                            <button class="ico text-dark pl-0 border-0 bg-transparent font-size-22"><i class="far fa-heart"></i></button>
+    
+                            {% if request.user.id in post.liked_users %}
+                                <button  onclick="location.replace('/posts/like/{{ post.id }}/')" 
+                                    class="ico text-danger pl-0 border-0 bg-transparent font-size-22">
+                                <i class="fas fa-heart"></i>
+                                </button>
+                            {% else %}
+                                <button  onclick="location.replace('/posts/like/{{ post.id }}/')" 
+                                class="ico pl-0 border-0 bg-transparent font-size-22">
+                                <i class="far fa-heart"></i>
+                                </button>
+                            {% endif %}
+                            
                             <button class="ico text-dark border-0 bg-transparent font-size-22"><i class="far fa-comment"></i></button>
                             <button class="ico text-dark border-0 bg-transparent font-size-22"><i class="far fa-paper-plane"></i></button> 
                         </div>
@@ -45,7 +58,7 @@
                     </div>
 
                     <!-- post likes -->
-                    <p class="my-5 font-weight-semi-bold text-dark">5,019 likes</p>
+                    <p class="my-5 font-weight-semi-bold text-dark">{{ post.post_likes.count }} likes</p>
 
                     <!-- post user and description -->
                     <div>

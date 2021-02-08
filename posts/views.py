@@ -1,15 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from .forms import PostAddForm
-from .models import Post
+from .models import Post, Like
 # Create your views here.
 
 @login_required
 def home_view(request):
-    posts = Post.objects.all().prefetch_related('post_likes')
-    for post in posts:
-        print(post.post_likes.count())
+    posts = Post.objects.all().prefetch_related('post_likes','user')
     return render(request, 'posts/home.html', {'posts':posts})
 
 @login_required
@@ -20,9 +19,24 @@ def add_post(request):
             post = form.save(commit=False)
             post.user = request.user
             post.save()
+            messages.success(request, "successful")
             return redirect('posts:home')
         else:
             return render(request, 'posts/add_post.html', {'form': form})
     else:
+        
         form = PostAddForm()
         return render(request, 'posts/add_post.html', {'form': form})
+
+
+def like_toggle(request, post_id):
+    post = Post.objects.get(id=post_id)
+    user = request.user
+
+    try:
+        already_liked = Like.objects.get(post=post, user=user)
+        already_liked.delete()
+    except:
+        Like.objects.create(post=post, user=user)
+
+    return redirect('posts:home')

@@ -67,6 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'posts.custom_context.post_count'
             ],
         },
     },
@@ -141,3 +142,6 @@ EMAIL_HOST_PASSWORD = 'fakeinsta1130'
 EMAIL_PORT = 587  
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'

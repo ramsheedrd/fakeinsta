@@ -13,6 +13,10 @@ class Post(models.Model):
     create_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
+    def liked_users(self):
+        objects = Like.objects.filter(post=self).values_list('user', flat=True)
+        return objects
+
 
 @receiver(post_delete, sender=Post)
 def delete_post_image(sender, instance, *args, **kwargs):
