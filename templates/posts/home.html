@@ -36,8 +36,7 @@
                     <!-- post button -->
                     <div class="d-flex justify-content-between">
                         <div>
-    
-                            {% if request.user.id in post.liked_users %}
+                            {% if post.is_liked %}
                                 <button  onclick="location.replace('/posts/like/{{ post.id }}/')" 
                                     class="ico text-danger pl-0 border-0 bg-transparent font-size-22">
                                 <i class="fas fa-heart"></i>
