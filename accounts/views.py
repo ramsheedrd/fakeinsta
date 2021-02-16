@@ -93,3 +93,6 @@ def logout_view(request):
 def verification_required(request, email):
     return render(request, "accounts/verification_required.html", {"email": email})
 
+
+def page_not_found_view(request, exception):
+    return render(request, "error404.html", {})

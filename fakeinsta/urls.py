@@ -34,3 +34,4 @@ if settings.DEBUG:
     urlpatterns += [path('__debug__/', include(debug_toolbar.urls))]
 
 
+handler404 = 'accounts.views.page_not_found_view'
