@@ -23,7 +23,16 @@
                         </div>
                     </div>
                     <div class="mx-15">
-                        <img style="width: 15px;" src="{% static 'posts/menu.svg' %}" alt="">
+                        <div class="dropdown">
+                            <img  data-toggle="dropdown" id="dropdown-toggle-btn-{{ post.id }}" aria-haspopup="true" aria-expanded="false" style="width: 15px;" src="{% static 'posts/menu.svg' %}" alt="">
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-toggle-btn-{{ post.id }}">
+                              <h6 class="dropdown-header">Header</h6>
+                              <a href="#" class="dropdown-item">Link {{ post.id }}</a>
+                              <a href="#" class="dropdown-item">Link 2</a>
+                            </div>
+                          </div>
+                        
                     </div>
                 </div>
 
@@ -57,7 +66,7 @@
                         <p class="my-0 text-dark d-inline-block">
                             <span class="font-weight-semi-bold ">{{ post.user.first_name }}</span>
                             <span class="">
-                                {{ post.caption }}
+                                {{ post.caption }} 
                             </span>
                         </p>
                     </div>
@@ -164,6 +173,7 @@
                 </div>
 
             </div>
+            
         </div>
     </div>
     <script>

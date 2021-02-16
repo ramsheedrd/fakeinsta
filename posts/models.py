@@ -42,4 +42,3 @@ class Comment(models.Model):
 class HashTag(models.Model):
     tag = models.CharField(max_length=40)
     post = models.ManyToManyField(Post)
-

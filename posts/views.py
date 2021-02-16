@@ -54,6 +54,7 @@ def like_toggle(request, post_id):
         response['status'] = 'like'
 
     response['count'] = Like.objects.filter(post=post).count()
+
     return JsonResponse(response)
 
 
