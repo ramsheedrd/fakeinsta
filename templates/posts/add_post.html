@@ -236,11 +236,10 @@
 
                 // compression start here
                 new Compressor(file, {
-                quality: 0.4,
-                width: 780,
-                maxWidth: 780,
+                quality: 0.3,
+                width: 480,
+                maxWidth: 480,
                 success(result) {
-                    console.log(result.size)
                     var formData = new FormData()
                     formData.append('csrfmiddlewaretoken', form.csrfmiddlewaretoken.value)
                     formData.append('caption', form.caption.value)

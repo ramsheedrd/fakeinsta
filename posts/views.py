@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
-from django.shortcuts import HttpResponse, redirect, render
+from django.http import JsonResponse, HttpResponseNotFound
+from django.shortcuts import HttpResponse, redirect, render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 
 from .forms import PostAddForm
@@ -41,8 +41,9 @@ def add_post(request):
         return render(request, "posts/add_post.html", {"form": form})
 
 
+@login_required
 def like_toggle(request, post_id):
-    post = Post.objects.get(id=post_id)
+    post = get_object_or_404(Post, id = post_id)
     user = request.user
     response = {}
     try:
@@ -58,15 +59,26 @@ def like_toggle(request, post_id):
     return JsonResponse(response)
 
 
+@login_required
 @csrf_exempt
 def add_comment(request):
     post_id = request.POST.get('post_id')
     comment = request.POST.get('comment')
 
-    post = Post.objects.get(id=post_id)
+    post = get_object_or_404(Post, id = post_id)
     user = request.user
 
     Comment.objects.create(user=user, post=post, comment=comment)
     return JsonResponse({'user':user.first_name, 'comment':comment})
+
+
+@login_required
+def delete_post(request, post_id, next):
+    post = get_object_or_404(Post, id = post_id)
+    if request.user == post.user:
+        post.delete()
+        return redirect(next)
+    else:
+        return HttpResponseNotFound()
 
 
