@@ -2,6 +2,11 @@
 
 {% load static %}
 
+{% block scripts_extra %}
+        <script src="{% static 'posts/jquery.emojiarea.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'posts/jquery.emojiarea.css' %}">
+{% endblock scripts_extra %}
+
 {% block content %}
     <div class="d-flex justify-content-center mt-0 mt-sm-20">
         <div class="w-full"
@@ -32,7 +37,7 @@
                             {% if request.user == post.user %}
                               <a href="{% url 'posts:delete_post' post.id request.path %}" class="dropdown-item">Delete</a>
                             {% endif %}  
-                              <a href="#" class="dropdown-item">Link 2</a>
+                              <a href="#" class="dropdown-item">Report</a>
                             </div>
                           </div>
                         
@@ -103,8 +108,9 @@
                     <hr>
                 </div>
                 <!-- new comment -->
-                <div class="d-none d-sm-flex mx-10 px-5 h-50">
-                    <button style="font-size: 24px;" class="ico text-dark pl-0 mr-5 border-0
+                <div data-emojiarea data-type="unicode" data-global-picker="false" 
+                class="d-none d-sm-flex mx-10 px-5 h-50">
+                    <button style="font-size: 24px;" class="emoji-button ico text-dark pl-0 mr-5 border-0
                                    bg-transparent">
                         <i class="far fa-smile"></i>
                     </button>

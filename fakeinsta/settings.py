@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'ty56leg8cpog1-2-y7^0j)@_11=jgtnhvx*ol*198!4*ghx885'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -128,7 +128,7 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'accounts.UserAccounts'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = BASE_DIR / 'media'
 
 
 INTERNAL_IPS = [
@@ -144,4 +144,4 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
+STATIC_ROOT = BASE_DIR / 'static'
