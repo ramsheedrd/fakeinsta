@@ -59,6 +59,7 @@ class ProfilePicture(models.Model):
     user = models.OneToOneField(UserAccounts, on_delete = models.CASCADE)
     image = models.ImageField(upload_to='profile', default='avatar.jpg')
 
+
 class Friends(models.Model):
     follower = models.ForeignKey(UserAccounts, on_delete=models.CASCADE, related_name='follower')
     following = models.ForeignKey(UserAccounts, on_delete=models.CASCADE,  related_name='following')

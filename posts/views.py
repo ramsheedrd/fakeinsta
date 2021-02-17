@@ -81,4 +81,3 @@ def delete_post(request, post_id, next):
     else:
         return HttpResponseNotFound()
 
-
