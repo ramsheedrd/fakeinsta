@@ -35,7 +35,7 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-toggle-btn-{{ post.id }}">
                             {% if request.user == post.user %}
-                              <a href="{% url 'posts:delete_post' post.id request.path %}" class="dropdown-item">Delete</a>
+                              <a href="{% url 'posts:delete_post' post.id %}?next={{request.path}}" class="dropdown-item">Delete</a>
                             {% endif %}  
                               <a href="#" class="dropdown-item">Report</a>
                             </div>

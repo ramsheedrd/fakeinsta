@@ -73,10 +73,11 @@ def add_comment(request):
 
 
 @login_required
-def delete_post(request, post_id, next):
+def delete_post(request, post_id):
     post = get_object_or_404(Post, id = post_id)
     if request.user == post.user:
         post.delete()
+        next = request.GET.get('next', '/')
         return redirect(next)
     else:
         return HttpResponseNotFound()
